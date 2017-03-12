@@ -19,7 +19,7 @@ include_once "classes/Gracenote/Gracenote.class.php";
 
                 $i = 0;
                 foreach ($moods as $m) {
-                    echo "<input type='radio' name='mood' id='".$m['id']."' value='".$m['id']."' onclick='this.form.submit()'><label for='".$m['id']."'>".$m['mood']."</label><br/>";
+                    echo "<a href='index.php?radio=".$_GET['radio'].$_GET['genre']."?mood=".$m['id']."'>".$m['mood']."</a><br/>";
                     if (++$i == 15) break;
                 }
                 ?>
