@@ -6,27 +6,35 @@ include_once "classes/Gracenote/Gracenote.class.php";
 ?>
     
         <h1>Müscover</h1>
-            <div id="genre">
-            <?php 
-            foreach ($genres as $k => $v) {
-                echo "<a href='index.php?radio=".$k."?genre=".$v[0]."'>".$v[1]."</a><br/>";
-            }
-            ?>
-            </div>
-            <div id="mood">
+            <form action="index.php" method="post">
+            <?php
+            if (!isset($_POST['radio'])) { 
+            ?>    
+                <fieldset>
                 <?php
-                $moods = $newGrace->setMoods($_GET['radio']);
+                foreach($genres as $k => $v) {
+                    echo "<input type='radio' name='radio' id='".$v[0]."' value='".$k."' onclick='this.form.submit()'><label for='".$v[0]."'>".$v[1]."</label><br/>";
+                }
+                ?>
+                </fieldset>
+            <?php
+            }
+            if (isset($_POST['radio'])) { 
+                $moods = $newGrace->setMoods($_POST['radio']);
+            ?>
+                <fieldset>
+                <?php
 
                 $i = 0;
                 foreach ($moods as $m) {
-                    echo "<a href='index.php?radio=".$_GET['radio'].$_GET['genre']."?mood=".$m['id']."'>".$m['mood']."</a><br/>";
+                    echo "<input type='radio' name='mood' id='".$m['id']."' value='".$m['id']."' onclick='this.form.submit()'><label for='".$m['id']."'>".$m['mood']."</label><br/>";
                     if (++$i == 15) break;
                 }
                 ?>
-            </div>
-            <form method="post" action="index.php">
-                
-                
+                </fieldset>
+            <?php    
+            }
+            ?>
             </form>
 <?php
 require "includes/footer.php";
