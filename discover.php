@@ -2,24 +2,26 @@
 $window_title = "Welcome";
 require "includes/header.php";
 
-$moods = $newGrace->setMoods($_POST['radio']);
-$genre = $genres[$_POST['radio']];
 
-$i = 0;
 ?>
     
         <h1>Müscover</h1>
-
-            <form method="post" action="index.php">
-                <img src="images/<?php echo $genre[0];?>.png"  alt="<?php echo $genre[1];?>">
-                <input type="hidden" name="genre" value="<?php echo $genre[0];?>">
+            <fieldset>
+                <img src="images/<?php echo $_POST['genre']['id'];?>.png" alt="<?php echo $_POST['genre']['name'];?> Icon">
+                <img src="images/<?php echo $_POST['mood']['id'];?>.png" alt="<?php echo $_POST['mood']['name'];?> Icon">
+                <p>Select a song.</p>
                 <?php
-                foreach ($moods as $m) {
-                    echo "<input type='radio' name='mood' id='".$m['id']."' value='".$m['id']."' onclick='this.form.submit()'><label for='".$m['id']."'>".$m['mood']."</label><br/>";
-                    if (++$i == 15) break;
-                }
+                    $tracks = $newGrace->getRecomend($_POST['genre']['radio'],$_POST['track']);
+                    foreach ($tracks as $m) {
+                        echo "<form action='discover.php' method='post'>";
+                        
+                        echo "<img src='".$m['cover']."'><input type='radio' name='track' id='".$m['artist']."' value='".$m['id']."' onclick='this.form.submit()'><label for='".$m['artist']."'>".$m['artist']."</label><br><label for='".$m['artist']."'>".$m['album']." - ".$m['track']."</label>";
+                        
+                        //block of code to push forward the $_POST['genre'] values
+                        echo "<input type='hidden' name='genre[id]' value='".$_POST['genre']['id']."'><input type='hidden' name='genre[name]' value='".$_POST['genre']['name']."'><input type='hidden' name='genre[radio]' value='".$_POST['genre']['radio']."'></form>";
+                    }
                 ?>
-            </form>
+            </fieldset>            
 <?php
 
 

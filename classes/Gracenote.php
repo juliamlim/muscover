@@ -111,24 +111,33 @@ class Gracenote {
             
             $artist = (empty($a->TRACK->ARTIST)) ? $a->ARTIST : $a->TRACK->ARTIST ;
             
-            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'track' => $a->TRACK->TITLE,'cover' => $a->URL];
+            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE,'cover' => $a->URL];
         }
         
         return $tracks;
     }
     public function getRecomend($radio, $track) {
-        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/event?https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/lookahead?client=[clientId]-[clientTag]&user=[userId]&radio_id=[radioId]&event=track_like_[trackID]&select_extended=cover&return_count=8&cover_size=small";
+        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/event?client=[clientId]-[clientTag]&user=[userId]&radio_id=[radioId]&event=track_played_[trackID]&select_extended=cover&return_count=8&cover_size=small";
         
         $this->replaceString[] = '[radioId]';
         $this->replaceValue[] = $radio;
         
         $this->replaceString[] = '[trackID]';
-        $this->replaceValue[] = $radio;
+        $this->replaceValue[] = $track;
         
         $rmdURL = $this->getUrl($url);
         $xml = simplexml_load_file($rmdURL);
         
+        $tracks = [];
         
+        foreach($xml->RESPONSE->ALBUM as $a) {
+            
+            $artist = (empty($a->TRACK->ARTIST)) ? $a->ARTIST : $a->TRACK->ARTIST ;
+            
+            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE,'cover' => $a->URL];
+        }
+        
+        return $tracks;
     }
 }
 ?>
