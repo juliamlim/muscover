@@ -1,13 +1,17 @@
-            <fieldset>  
-                <p>Choose a genre</p>
-                
+                <h2>Genre</h2>
+                <p>Select a genre.</p>
                 <?php
                 $genres = $newGrace->getGenres();
                 
                 foreach($genres as $v) { ?>
-                <form action="index.php" method="post">
+                <form action='index.php' method='post' class='form__genre'>
+                    <button type='submit' name='genre[id]' id='<?php echo $v['name'];?>' value='<?php echo $v['id'];?>'>
+                        <img src='images/genre/<?php echo $v['id'];?>.svg' alt='<?php echo $v['name'];?> icon' title='<?php echo $v['name'];?>'>
+                        <p><?php echo $v['name'];?></p>
+                    </button>
+                    <input type='hidden' name='genre[name]' value='<?php echo $v['name'];?>'>
+                    <input type='hidden' name='genre[radio]' value='<?php echo $v['radio'];?>'>
+                </form>
                 <?php
-                    echo "<input type='hidden' name='genre[id]' value='".$v[0]."'><input type='hidden' name='genre[name]' value='".$v[1]."'><input type='radio' name='genre[radio]' id='".$v[0]."' value='".$v[2]."' onclick='this.form.submit()'><label for='".$v[0]."'>".$v[1]."</label></form>";
                 }
                 ?>
-            </fieldset>

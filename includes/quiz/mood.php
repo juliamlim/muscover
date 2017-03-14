@@ -1,17 +1,29 @@
-            <fieldset>
-                <img src="images/<?php echo $_POST['genre']['id'];?>.png" alt="<?php echo $_POST['genre']['name'];?> Icon">
-                <p>What vibes are you feeling?</p>
+                <h2>Mood</h2>
+                
+                <section id="icons">
+                    <div>
+                        <img src="images/genre/<?php echo $_POST['genre']['id'];?>.svg" id="genre_icon" alt="<?php echo $_POST['genre']['name'];?> Icon"><p><?php echo $_POST['genre']['name'];?></p>
+                    </div>
+                </section>
+                <p>What are you in the mood for?</p>
                 <?php
                 $moods = $newGrace->getMoods($_POST['genre']['radio']);
 
-                    $i = 0;
+                $i = 0;
+                foreach ($moods as $m) { ?>
+                <form action='index.php' method='post' class='form__mood'>
+                    <button type='submit' name='mood[id]' id='<?php echo $m['mood'];?>' value='<?php echo $m['id'];?>'>
+                        <img src='images/<?php echo $m['id'];?>.svg' alt='<?php echo $m['mood'];?> icon' title='<?php echo $m['mood'];?>'>
+                        <p><?php echo $m['mood'];?></p>
+                    </button>
+                    <input type='hidden' name='mood[name]' value='<?php echo $m['mood'];?>'>
                     
-                    foreach ($moods as $m) {
-                        echo "<form action='index.php' method='post'>";
-                        echo "<input type='radio' name='mood[id]' id='".$m['id']."' value='".$m['id']."' onclick='this.form.submit()'><label for='".$m['id']."'>".$m['mood']."</label><input type='hidden' name='mood[name]' value='".$m['mood']."'>";
-                        //block of code to push forward the $_POST['genre'] values
-                        echo "<input type='hidden' name='genre[id]' value='".$_POST['genre']['id']."'><input type='hidden' name='genre[name]' value='".$_POST['genre']['name']."'><input type='hidden' name='genre[radio]' value='".$_POST['genre']['radio']."'></form>";
-                        if (++$i == 15) break;
-                    }
+                    <?php//Pushes the genre[] values forward ?>
+                    <input type='hidden' name='genre[id]' value='<?php echo $_POST['genre']['id'];?>'>
+                    <input type='hidden' name='genre[name]' value='<?php echo $_POST['genre']['name'];?>'>
+                    <input type='hidden' name='genre[radio]' value='<?php echo $_POST['genre']['radio'];?>'>
+                </form>
+                <?php
+                    if (++$i == 15) break;
+                }
                 ?>
-            </fieldset>
