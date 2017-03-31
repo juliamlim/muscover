@@ -99,7 +99,7 @@ class Gracenote {
     }
     
     public function getTracks($genre,$mood) {
-        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/recommend?client=[clientId]-[clientTag]&user=[userId]&seed=(genre_[genreId])&select_extended=cover&return_count=3&cover_size=small&filter_mood=[moodId]&focus_popularity=[popular]&focus_similarity=0&max_tracks_per_artist=1";
+        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/recommend?client=[clientId]-[clientTag]&user=[userId]&seed=(genre_[genreId])&select_extended=mood,cover&return_count=3&cover_size=small&filter_mood=[moodId]&focus_popularity=[popular]&focus_similarity=0&max_tracks_per_artist=1";
         
         $popular = rand(0,1000);
         
@@ -111,13 +111,13 @@ class Gracenote {
             
             $artist = (empty($a->TRACK->ARTIST)) ? $a->ARTIST : $a->TRACK->ARTIST ;
             
-            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE,'cover' => $a->URL];
+            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE, 'genre' => $a->GENRE ,'mood' => $a->TRACK->MOOD, 'cover' => $a->URL];
         }
         
         return $tracks;
     }
     public function getRecomend($radio, $track) {
-        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/event?client=[clientId]-[clientTag]&user=[userId]&radio_id=[radioId]&event=track_played_[trackID]&select_extended=cover&return_count=8&cover_size=small";
+        $url = "https://c[clientId].web.cddbp.net/webapi/xml/1.0/radio/event?client=[clientId]-[clientTag]&user=[userId]&radio_id=[radioId]&event=track_played_[trackID]&select_extended=mood,cover&return_count=5&cover_size=small";
         
         $xml = $this->getXML($url,['[radioId]','[trackID]'],[$radio,$track]);
 

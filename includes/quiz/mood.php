@@ -12,10 +12,7 @@
                 $i = 0;
                 foreach ($moods as $m) { ?>
                 <form action='index.php' method='post' class='form__mood'>
-                    <button type='submit' name='mood[id]' id='<?php echo $m['mood'];?>' value='<?php echo $m['id'];?>'>
-                        <img src='images/<?php echo $m['id'];?>.svg' alt='<?php echo $m['mood'];?> icon' title='<?php echo $m['mood'];?>'>
-                        <p><?php echo $m['mood'];?></p>
-                    </button>
+                    <button type='submit' name='mood[id]' value='<?php echo $m['id'];?>'><a><?php echo $m['mood'];?></a></button>
                     <input type='hidden' name='mood[name]' value='<?php echo $m['mood'];?>'>
                     
                     <?php//Pushes the genre[] values forward ?>

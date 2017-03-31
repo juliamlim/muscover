@@ -1,10 +1,10 @@
 @charset "UTF-8";
+
 /*
-linear-gradient(-45deg, #ffafbd, #ffc3a0)
-linear-gradient(135deg,#CCD275,#006356)
-linear-gradient(135deg, #6f86d6 ,#48c6ef)
-linear-gradient(135deg, #88d3ce ,#6e45e2)
-linear-gradient(135deg, #9be15d ,#00e3ae)
+
+*   linear-gradient(135deg, #6f86d6 ,#48c6ef) - very blue but nice and poppy 
+**  linear-gradient(135deg, #FFD22F ,#FF7B08) - yellow 
+
 */
 
 * {
@@ -12,7 +12,7 @@ linear-gradient(135deg, #9be15d ,#00e3ae)
 }
 body {
     margin: 0;
-    background: linear-gradient(135deg, #ed6ea0 ,#ec8c69);
+    background: linear-gradient(135deg, #FFD22F ,#FF7B08);
 }
 h1,
 h2 {
@@ -85,20 +85,21 @@ form {
 }
 .form__mood,
 .form__mood button{
-    width: 100px;
-    height: 100px;
+    -webkit-appearance: none;
+    border:none;
+    background: none;
     display: inline-block;
     margin: 10px;
     cursor: pointer;
 }
-.form__mood button img {
+/*.form__mood button img {
     max-width: 100%;
     max-height: 100%;
 }
 .form__mood button p {
     position: relative;
     top: -30px;
-}
+}*/
 #icons div {
     width: 200px;
     display: inline-block;
@@ -109,10 +110,12 @@ form {
     width: 30px;
     height: 30px;
 }
-#reset {
+#reset,
+.form__mood button {
     margin: 40px 0 30px;
 }
-#reset a {
+#reset a
+{
     width: 100px;
     padding: 7px 18px;
     border: 1.9px solid #ec8c69;
@@ -123,17 +126,13 @@ form {
     text-decoration: none;
     text-transform: uppercase;
 }
-#reset a,
-.form__genre,
-.form__mood {
+#reset a
+{
     transition: border-color 0.3s ease, color 0.3s ease;
 }
 #reset a:hover,
-#reset a:focus,
-.form__genre:hover,
-.form__genre:focus,
-.form__mood:hover,
-.form__mood:focus{
+#reset a:focus
+{
     border-color: #ed6ea0;
     color: #ed6ea0;
 }
