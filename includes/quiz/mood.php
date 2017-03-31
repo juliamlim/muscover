@@ -2,7 +2,7 @@
                 
                 <section id="icons">
                     <div>
-                        <img src="images/genre/<?php echo $_POST['genre']['id'];?>.svg" id="genre_icon" alt="<?php echo $_POST['genre']['name'];?> Icon"><p><?php echo $_POST['genre']['name'];?></p>
+                        <img src="images/genre/<?php echo $_POST['genre']['id'];?>.png" id="genre_icon" alt="<?php echo $_POST['genre']['name'];?> Icon"><p><?php echo $_POST['genre']['name'];?></p>
                     </div>
                 </section>
                 <p>What are you in the mood for?</p>

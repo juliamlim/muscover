@@ -110,8 +110,9 @@ class Gracenote {
         foreach($xml->RESPONSE->ALBUM as $a) {
             
             $artist = (empty($a->TRACK->ARTIST)) ? $a->ARTIST : $a->TRACK->ARTIST ;
+            $cover = (empty($a->URL)) ? 'http://cjsi.streamon.fm/images/default-album-artwork.jpg' : $a->URL ;
             
-            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE, 'genre' => $a->GENRE ,'mood' => $a->TRACK->MOOD, 'cover' => $a->URL];
+            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE, 'genre' => $a->GENRE ,'mood' => $a->TRACK->MOOD, 'cover' => $cover];
         }
         
         return $tracks;
@@ -126,8 +127,9 @@ class Gracenote {
         foreach($xml->RESPONSE->ALBUM as $a) {
             
             $artist = (empty($a->TRACK->ARTIST)) ? $a->ARTIST : $a->TRACK->ARTIST ;
+            $cover = (empty($a->URL)) ? 'http://cjsi.streamon.fm/images/default-album-artwork.jpg' : $a->URL ;
             
-            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE,'cover' => $a->URL];
+            $tracks[] = ['id' => $a->TRACK->GN_ID, 'artist' => $artist, 'album' => $a->TITLE, 'track' => $a->TRACK->TITLE, 'genre' => $a->GENRE ,'mood' => $a->TRACK->MOOD, 'cover' => $cover];
         }
         
         return $tracks;
